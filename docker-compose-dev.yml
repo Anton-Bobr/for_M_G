@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+    mysql:
+        container_name: 'mysql-manyvids'
+        image: 'mysql:5.7.37'
+        environment:
+            - 'MYSQL_DATABASE=mydatabase'
+            - 'MYSQL_PASSWORD=123456'
+            - 'MYSQL_ROOT_PASSWORD=123123'
+            - 'MYSQL_USER=user'
+        ports:
+            - '33069:3306'

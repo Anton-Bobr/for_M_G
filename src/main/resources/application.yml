@@ -1,0 +1,31 @@
+spring:
+    application:
+        name: parser
+    datasource:
+        url: jdbc:mysql://localhost:33069/mydatabase
+        username: user
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+        show-sql: true
+        hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+            ddl-auto: update
+#            ddl-auto: none
+
+
+app:
+    settings:
+        username: dvLCtdDO_cRjgSCcD
+        password: sdfsdgf@$@123
+
+        delay:
+            min: 1
+            max: 2
+
+        subscriptions-per-day:
+            min: 10
+            max: 20
+        number-of-days-for-unsubscribe: 7
