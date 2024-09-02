@@ -42,3 +42,4 @@ out/
 /gradlew.bat
 /jenkins-data/
 /jenkins-docker-certs/
+/temp
