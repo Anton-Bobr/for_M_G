@@ -15,6 +15,8 @@ node {
                 }
             } else {
                 echo "Current branch is master"
+                "java --version".execute()
+                "gradle --version".execute()
             }
         }
 
