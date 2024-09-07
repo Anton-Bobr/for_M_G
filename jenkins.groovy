@@ -16,7 +16,7 @@ node {
             } else {
                 echo "Current branch is master"
                 scriptExec("java --version")
-                scriptExec("gradle --version")
+//                scriptExec("gradle --version")
             }
         }
 
