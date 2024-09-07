@@ -1,11 +1,13 @@
+task_branch = "${TEST_BRANCH_NAME}"
+def branch_cutted = task_branch.contains("origin") ? task_branch.split('/')[1] : task_branch.trim()
+currentBuild.displayName = "$branch_cutted"
+base_git_url = "https://github.com/Anton-Bobr/for_M_G.git"
+
 pipeline {
     agent any
     tools {
         gradle 'gradle_jenkins'
     }
-//    options {
-//        skipStagesAfterUnstable()
-//    }
     stages {
         stage('Clone Repo') {
             steps {
