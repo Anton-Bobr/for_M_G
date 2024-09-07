@@ -26,10 +26,15 @@ pipeline {
                 runTestWithTag("subscribeToNewUsers")
             }
         }
-        stage('Allure') {
-            steps {
-                generateAllure()
-            }
+//        stage('Allure') {
+//            steps {
+//                generateAllure()
+//            }
+//        }
+    }
+    post {
+        always {
+            generateAllure()
         }
     }
 }
