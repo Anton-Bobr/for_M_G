@@ -18,7 +18,7 @@ pipeline {
             steps {
                 scriptExec("java --version")
                 scriptExec("gradle --version")
-//                scriptExec("gradle wrapper")
+                scriptExec("gradle wrapper --info")
             }
         }
         stage('Test') {
