@@ -15,8 +15,8 @@ node {
                 }
             } else {
                 echo "Current branch is master"
-                "java --version".execute()
-                "gradle --version".execute()
+                scriptExec("java --version")
+                scriptExec("gradle --version")
             }
         }
 
@@ -25,7 +25,7 @@ node {
                 runTestWithTag("SubscribeToNewUsers")
             }
         } finally {
-            stage ("Allure") {
+            stage("Allure") {
                 generateAllure()
             }
         }
@@ -58,4 +58,13 @@ def generateAllure() {
             reportBuildPolicy: 'ALWAYS',
             results          : [[path: 'build/allure-results']]
     ])
+}
+
+void scriptExec(String command) {
+    OUTPUT = sh(
+            script: command,
+            returnStdout: true
+    ).trim()
+    echo "Command: ${command}"
+    echo "Command Out: ${OUTPUT}"
 }
