@@ -12,6 +12,7 @@ import com.manyvids.parser.selenium.page.FollowerPage;
 import com.manyvids.parser.selenium.page.LoginPage;
 import com.manyvids.parser.selenium.page.MainPage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Slf4j
+@Tag("SubscribeToNewUsers")
 class SubscribeToNewUsersTest extends AbstractTestCases {
 
     @BeforeEach
