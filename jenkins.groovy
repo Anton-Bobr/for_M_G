@@ -4,6 +4,9 @@ currentBuild.displayName = "$branch_cutted"
 base_git_url = "https://github.com/Anton-Bobr/for_M_G.git"
 
 node {
+    tools {
+        gradle_jenkins
+    }
     withGradle {
         sh './gradlew build'
         withEnv(["branch=${branch_cutted}", "base_url=${base_git_url}"]) {
