@@ -12,8 +12,13 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 getProject("$base_git_url", "$branch_cutted")
+            }
+        }
+        stage('Build') {
+            steps {
                 scriptExec("java --version")
                 scriptExec("gradle --version")
+                scriptExec("gradle wrapper")
             }
         }
         stage('Test') {
