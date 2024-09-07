@@ -6,7 +6,7 @@ base_git_url = "https://github.com/Anton-Bobr/for_M_G.git"
 node {
     withEnv(["branch=${branch_cutted}", "base_url=${base_git_url}"]) {
         stage("Checkout Branch") {
-            if (!"$branch_cutted".contains("master")) {
+            if (!"$branch_cutted".contains("main")) {
                 try {
                     getProject("$base_git_url", "$branch_cutted")
                 } catch (err) {
