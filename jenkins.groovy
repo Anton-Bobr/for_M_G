@@ -5,6 +5,7 @@ base_git_url = "https://github.com/Anton-Bobr/for_M_G.git"
 
 node {
     withGradle {
+        sh './gradlew build'
         withEnv(["branch=${branch_cutted}", "base_url=${base_git_url}"]) {
             stage("Checkout Branch") {
                 if (!"$branch_cutted".contains("main")) {
