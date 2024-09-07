@@ -6,7 +6,7 @@ base_git_url = "https://github.com/Anton-Bobr/for_M_G.git"
 pipeline {
     agent any
     tools {
-        gradle 'gradle_jenkins'
+        gradle 'jenkins_gradle_8.8'
     }
     stages {
         stage('Clone Repo') {
