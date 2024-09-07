@@ -4,29 +4,31 @@ currentBuild.displayName = "$branch_cutted"
 base_git_url = "https://github.com/Anton-Bobr/for_M_G.git"
 
 node {
-    withEnv(["branch=${branch_cutted}", "base_url=${base_git_url}"]) {
-        stage("Checkout Branch") {
-            if (!"$branch_cutted".contains("main")) {
-                try {
-                    getProject("$base_git_url", "$branch_cutted")
-                } catch (err) {
-                    echo "Failed get branch $branch_cutted"
-                    throw ("${err}")
+    withGradle {
+        withEnv(["branch=${branch_cutted}", "base_url=${base_git_url}"]) {
+            stage("Checkout Branch") {
+                if (!"$branch_cutted".contains("main")) {
+                    try {
+                        getProject("$base_git_url", "$branch_cutted")
+                    } catch (err) {
+                        echo "Failed get branch $branch_cutted"
+                        throw ("${err}")
+                    }
+                } else {
+                    echo "Current branch is master"
+                    scriptExec("java --version")
+                    scriptExec("gradle --version")
                 }
-            } else {
-                echo "Current branch is master"
-                scriptExec("java --version")
-//                scriptExec("gradle --version")
             }
-        }
 
-        try {
-            stage("Run Test") {
-                runTestWithTag("SubscribeToNewUsers")
-            }
-        } finally {
-            stage("Allure") {
-                generateAllure()
+            try {
+                stage("Run Test") {
+                    runTestWithTag("SubscribeToNewUsers")
+                }
+            } finally {
+                stage("Allure") {
+                    generateAllure()
+                }
             }
         }
     }
