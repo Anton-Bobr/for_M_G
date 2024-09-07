@@ -43,5 +43,5 @@ out/
 /jenkins-data/
 /jenkins-docker-certs/
 /temp
-/temp/gradle.properties
+/gradle.properties
 
