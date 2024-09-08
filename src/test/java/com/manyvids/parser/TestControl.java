@@ -1,6 +1,7 @@
 package com.manyvids.parser;
 
 import com.manyvids.parser.service.WebDriverService;
+import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
@@ -30,6 +31,16 @@ public class TestControl implements TestWatcher {
 
     @Override
     public void testAborted(final ExtensionContext context, final Throwable cause) {
+        finishFailedTest(context, cause);
+    }
+
+    @Override
+    public void testFailed(final ExtensionContext context, final Throwable cause) {
+        finishFailedTest(context, cause);
+    }
+
+    private void finishFailedTest(final ExtensionContext context,
+                                  final Throwable cause) {
         final String testMethod = context.getTestMethod().orElseThrow().getName();
         makeScrnShot(WebDriverService.getDriver(),
                      "build/screenshots/" + testMethod + ".png");
@@ -37,21 +48,13 @@ public class TestControl implements TestWatcher {
         reloadSession();
     }
 
-    @Override
-    public void testFailed(final ExtensionContext context, final Throwable cause) {
-        final String testMethod = context.getTestMethod().orElseThrow().getName();
-        makeScrnShot(WebDriverService.getDriver(),
-                     "screenshots/" + testMethod + ".png");
-        cause.printStackTrace();
-        reloadSession();
-    }
-
     private void makeScrnShot(final WebDriver driver, final String filePath) {
         try {
-            final TakesScreenshot screenShot = (TakesScreenshot) driver;
-            final File srcFile = screenShot.getScreenshotAs(OutputType.FILE);
+            final TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+            final File srcFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
             final File destFile = new File(filePath);
             FileUtils.copyFile(srcFile, destFile);
+            Allure.addAttachment("Screenshot", FileUtils.openInputStream(srcFile));
         } catch (final IOException ignored) {
         }
     }
