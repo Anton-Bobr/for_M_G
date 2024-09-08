@@ -32,7 +32,7 @@ public class TestControl implements TestWatcher {
     public void testAborted(final ExtensionContext context, final Throwable cause) {
         final String testMethod = context.getTestMethod().orElseThrow().getName();
         makeScrnShot(WebDriverService.getDriver(),
-                     "screenshots/" + testMethod + ".png");
+                     "build/screenshots/" + testMethod + ".png");
         cause.printStackTrace();
         reloadSession();
     }
