@@ -52,6 +52,10 @@ def subscribeToNewUsers = tasks.register("subscribeToNewUsers", Test) {
     }
 }
 
+test {
+    systemProperty 'spring.profiles.active', 'prod'
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }

@@ -26,11 +26,6 @@ pipeline {
                 runTestWithTag("subscribeToNewUsers")
             }
         }
-//        stage('Allure') {
-//            steps {
-//                generateAllure()
-//            }
-//        }
     }
     post {
         always {
@@ -63,7 +58,7 @@ def generateAllure() {
             jdk              : '21',
             properties       : [],
             reportBuildPolicy: 'ALWAYS',
-            results          : [[path: 'build/allure-results']]
+            results          : [[path: 'allure-results']]
     ])
 }
 
