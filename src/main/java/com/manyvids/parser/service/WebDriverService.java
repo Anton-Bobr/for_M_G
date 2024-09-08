@@ -45,7 +45,7 @@ public class WebDriverService {
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
 //        if (appProfile.equals("gitlab")) {
-//            options.addArguments("--headless");
+        options.addArguments("--headless");
 //        }
 
         final LoggingPreferences logPrefs = new LoggingPreferences();

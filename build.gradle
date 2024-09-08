@@ -3,7 +3,10 @@ plugins {
     id 'java-library'
     id 'org.springframework.boot' version '3.3.3'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'io.qameta.allure' version '2.12.0'
 }
+
+def allureVersion = '2.25.0'
 
 group = 'com.manyvids'
 version = '0.0.1-SNAPSHOT'
@@ -38,7 +41,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.22.0'
     implementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
-    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.25.0'
+    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: allureVersion
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
     implementation 'commons-io:commons-io:2.16.1'
 
@@ -51,6 +54,10 @@ def subscribeToNewUsers = tasks.register("subscribeToNewUsers", Test) {
     useJUnitPlatform {
         includeTags "SubscribeToNewUsers"
     }
+}
+
+allure {
+    version = allureVersion
 }
 
 //test {

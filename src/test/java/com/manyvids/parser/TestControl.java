@@ -12,18 +12,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.manyvids.parser.service.WebDriverService.reloadSession;
+
 public class TestControl implements TestWatcher {
 
     @Override
     public void testSuccessful(final ExtensionContext context) {
-        WebDriverService.reloadSession();
+        reloadSession();
     }
 
     @Override
     public void testDisabled(final ExtensionContext context, final Optional<String> reason) {
         System.err.println(
             "Test " + context.getTestMethod().orElseThrow().getName() + " disabled because of " + reason);
-        WebDriverService.reloadSession();
+        reloadSession();
     }
 
     @Override
@@ -32,7 +34,7 @@ public class TestControl implements TestWatcher {
         makeScrnShot(WebDriverService.getDriver(),
                      "screenshots/" + testMethod + ".png");
         cause.printStackTrace();
-        WebDriverService.reloadSession();
+        reloadSession();
     }
 
     @Override
@@ -41,7 +43,7 @@ public class TestControl implements TestWatcher {
         makeScrnShot(WebDriverService.getDriver(),
                      "screenshots/" + testMethod + ".png");
         cause.printStackTrace();
-        WebDriverService.reloadSession();
+        reloadSession();
     }
 
     private void makeScrnShot(final WebDriver driver, final String filePath) {
