@@ -1,7 +1,6 @@
 package com.manyvids.parser.service;
 
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -19,27 +17,27 @@ import java.util.logging.Level;
 @Service
 public class WebDriverService {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
     static final int WAIT_TIME_DEFAULT = 10;
 
     public static final String APP_URL = "https://www.manyvids.com/";
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         if (driver == null) {
             setupWebDriver();
         }
         return driver;
     }
 
-    public void reloadSession() {
+    public static void reloadSession() {
         if (driver != null) {
             driver.quit();
             driver = null;
         }
     }
 
-    private void setupWebDriver() {
+    private static void setupWebDriver() {
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         System.setProperty("java.awt.headless", "false");
 

@@ -10,6 +10,13 @@ RUN rm google-chrome-stable_current_amd64.deb
 # Check chrome version
 RUN echo "Chrome: " && google-chrome --version
 
+### install chromedriver
+ENV CHROMEDRIVER_VERSION=128.0.6613.119
+RUN wget https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip \
+  && unzip chromedriver-linux64.zip && rm -dfr chromedriver_linux64.zip \
+  && mv /chromedriver-linux64/chromedriver /usr/bin/chromedriver \
+  && chmod +x /usr/bin/chromedriver
+
 RUN echo "deb [arch=$(dpkg --print-architecture) \
   signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
   https://download.docker.com/linux/debian \

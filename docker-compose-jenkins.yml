@@ -2,25 +2,9 @@ version: '3.8'
 
 services:
 
-    jenkins-docker:
-        image: docker:dind
-        container_name: jenkins-docker
-        privileged: true
-        environment:
-            - DOCKER_TLS_CERTDIR=/certs
-        ports:
-            - 2376:2376
-        volumes:
-            - ./jenkins-data:/var/jenkins_home
-            - ./jenkins-docker-certs:/certs/client:ro
-        networks:
-            - jenkins
-
     myjenkins-blueocean:
-#        build:
-#            context: ./docker/jenkins
-#            dockerfile: Dockerfile
         image: myjenkins-blueocean:lts-jdk21
+#        image: myjenkins-blueocean:lts-jdk21-chrome-driver
         container_name: jenkins-blueocean
         restart: on-failure
         privileged: true

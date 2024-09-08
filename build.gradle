@@ -40,6 +40,7 @@ dependencies {
     implementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
     implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.25.0'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+    implementation 'commons-io:commons-io:2.16.1'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.11.0'
 //    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.7'

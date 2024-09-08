@@ -9,12 +9,14 @@ import com.manyvids.parser.service.SubscriberService;
 import com.manyvids.parser.service.WebDriverService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@ExtendWith(TestControl.class)
 public abstract class AbstractTestCases {
 
     @Value("${app.settings.username}")
@@ -37,8 +39,8 @@ public abstract class AbstractTestCases {
         return driverService.getDriver();
     }
 
-    @AfterEach
-    public void destroyDriver() {
-        driverService.reloadSession();
-    }
+//    @AfterEach
+//    public void destroyDriver() {
+//        driverService.reloadSession();
+//    }
 }
