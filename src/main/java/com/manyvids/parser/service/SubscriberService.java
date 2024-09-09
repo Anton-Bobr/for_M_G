@@ -46,4 +46,13 @@ public class SubscriberService {
         se.setWeSubscribedAt(LocalDateTime.now());
         subscriberRepo.saveAndFlush(se);
     }
+
+    public List<SubscriberEntity> getUsersWhoHaveNotSubscribedXdDays(final int numberOfDaysForUnsubscribe) {
+        return subscriberRepo.getUsersWhoHaveNotSubscribedXdDays(LocalDateTime.now(), numberOfDaysForUnsubscribe);
+    }
+
+    public void updateUserAsUnsubscribed(final SubscriberEntity user) {
+        user.setWeUnsubscribedAt(LocalDateTime.now());
+        subscriberRepo.saveAndFlush(user);
+    }
 }

@@ -15,15 +15,19 @@ public class WebElementWithDelay {
     public void clear() {
         getRandomDelay();
         element.clear();
+        getRandomDelay();
     }
 
     public void click() {
         getRandomDelay();
         element.click();
+        getRandomDelay();
+
     }
 
     public void sendKeys(final CharSequence... keysToSend) {
         getRandomDelay();
         element.sendKeys(keysToSend);
+        getRandomDelay();
     }
 }

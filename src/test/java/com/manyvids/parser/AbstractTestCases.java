@@ -7,8 +7,7 @@ import com.manyvids.parser.selenium.page.MainPage;
 import com.manyvids.parser.selenium.page.UserPage;
 import com.manyvids.parser.service.SubscriberService;
 import com.manyvids.parser.service.WebDriverService;
-import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +38,11 @@ public abstract class AbstractTestCases {
         return driverService.getDriver();
     }
 
-//    @AfterEach
-//    public void destroyDriver() {
-//        driverService.reloadSession();
-//    }
+    @BeforeEach
+    public void init() {
+        reInitVariables();
+    }
+
+    protected void reInitVariables() {
+    }
 }

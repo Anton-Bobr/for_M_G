@@ -1,13 +1,14 @@
 package com.manyvids.parser;
 
-import com.manyvids.parser.entity.SubscriberEntity;
 import com.manyvids.parser.selenium.page.LoginPage;
 import com.manyvids.parser.selenium.page.UserPage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+@Tag("ComparisonFollowers")
 public class ComparisonFollowersTest extends AbstractTestCases {
 
     @BeforeEach

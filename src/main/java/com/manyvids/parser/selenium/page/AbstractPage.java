@@ -2,7 +2,6 @@ package com.manyvids.parser.selenium.page;
 
 import com.manyvids.parser.selenium.WebElementWithDelay;
 import io.qameta.allure.Step;
-import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,14 +25,13 @@ public abstract class AbstractPage {
         this.driver = driver;
     }
 
-    public void open(final Dimension d) {
-        open(getPageUrn(),
-             d);
+    public void open(final String pageUrn) {
+        open(pageUrn,
+             PAGE_DIMENSION);
     }
 
     public void open() {
-        open(getPageUrn(),
-             PAGE_DIMENSION);
+        open(getPageUrn());
     }
 
     @Step("Открываю страницу {urlAppend} в разрешении {dimension}")

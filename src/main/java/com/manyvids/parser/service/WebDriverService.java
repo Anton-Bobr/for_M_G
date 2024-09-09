@@ -39,7 +39,7 @@ public class WebDriverService {
 
     private static void setupWebDriver() {
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-        System.setProperty("java.awt.headless", "true");
+        System.setProperty("java.awt.headless", "false");
 
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);

@@ -1,7 +1,6 @@
 package com.manyvids.parser.selenium.page;
 
 import com.manyvids.parser.selenium.WebElementWithDelay;
-import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 //@Slf4j
 public class FollowerPage extends AbstractPage {
 
-    private final static String PAGE_URN = "Activity/%s/%s/Store/club/";
+    public final static String PAGE_URN = "Activity/%s/%s/Store/club/";
+    public final static String FOLLOWING_BUTTON_XPATH = "//button[text()='FOLLOWING']";
 
     public FollowerPage(final WebDriver driver) {
         super(driver);
@@ -50,9 +50,20 @@ public class FollowerPage extends AbstractPage {
         return new WebElementWithDelay(driver.findElement(By.xpath("//button[text()='FOLLOW']")));
     }
 
+    public WebElementWithDelay getUnFollowBtn() {
+        return new WebElementWithDelay(driver.findElement(By.xpath(FOLLOWING_BUTTON_XPATH)));
+    }
 
     @Override
     protected String getPageUrn() {
         return PAGE_URN;
+    }
+
+    public boolean checkIsUserSubscribed() {
+        return !driver.findElements(By.xpath(FOLLOWING_BUTTON_XPATH)).isEmpty();
+    }
+
+    public void unsubscribed() {
+        getUnFollowBtn().click();
     }
 }
