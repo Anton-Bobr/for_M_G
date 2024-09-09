@@ -2,33 +2,34 @@ package com.manyvids.parser.selenium.page;
 
 import com.manyvids.parser.enums.ContentTypeEnum;
 import com.manyvids.parser.selenium.WebElementWithDelay;
-import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static java.lang.Thread.sleep;
+import static com.manyvids.parser.util.WaitConditionUtil.waitUntil;
 
 
 public class MainPage extends AbstractPage {
 
     private final static String PAGE_URN = "";
+    private final static String CREATORS_ICON_XPATH =
+        "//div[contains(@class, 'smallSideBar_small_sidebar')]//a[@data-event-label='Creators']";
 
     public MainPage(final WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
 
+
     @Override
     protected String getPageUrn() {
         return PAGE_URN;
     }
 
-    @SneakyThrows
     public void goToCreators() {
-        sleep(3000);
+        waitUntil(() -> !driver.findElements(By.xpath(CREATORS_ICON_XPATH)).isEmpty());
         getCreatorsBtn().click();
     }
 
@@ -40,8 +41,7 @@ public class MainPage extends AbstractPage {
     }
 
     public WebElementWithDelay getCreatorsBtn() {
-        return new WebElementWithDelay(driver.findElement(
-            By.xpath("//div[contains(@class, 'smallSideBar_small_sidebar')]//a[@data-event-label='Creators']")));
+        return new WebElementWithDelay(driver.findElement(By.xpath(CREATORS_ICON_XPATH)));
     }
 
     public WebElementWithDelay getCreatorTypeBtn(final ContentTypeEnum creatorType) {
