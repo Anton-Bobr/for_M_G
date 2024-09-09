@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 //@Slf4j
 public class FollowerPage extends AbstractPage {
 
-    public final static String PAGE_URN = "Activity/%s/%s/Store/club/";
+    public final static String PAGE_URN = "Activity/%s/%s/club/";
     public final static String FOLLOWING_BUTTON_XPATH = "//button[text()='FOLLOWING']";
 
     public FollowerPage(final WebDriver driver) {
@@ -22,14 +22,26 @@ public class FollowerPage extends AbstractPage {
             System.out.println("followerName: " + followerName + " page FAILED");
             return null;
         }
-        try {
-            getFollowBtn().click();
-        } catch (final ElementClickInterceptedException e) {
-            closePopupWindow();
-            getFollowBtn().click();
-        }
+        clickAdnCloseBannerIfNeed(getFollowBtn());
         final String[] arg = driver.getCurrentUrl().split("/");
         return arg[arg.length - 2];
+    }
+
+    public boolean checkIsUserSubscribed() {
+        return !driver.findElements(By.xpath(FOLLOWING_BUTTON_XPATH)).isEmpty();
+    }
+
+    public void unsubscribed() {
+        clickAdnCloseBannerIfNeed(getUnFollowBtn());
+    }
+
+    private void clickAdnCloseBannerIfNeed(final WebElementWithDelay button) {
+        try {
+            button.click();
+        } catch (final ElementClickInterceptedException e) {
+            closePopupWindow();
+            button.click();
+        }
     }
 
     private void closePopupWindow() {
@@ -57,13 +69,5 @@ public class FollowerPage extends AbstractPage {
     @Override
     protected String getPageUrn() {
         return PAGE_URN;
-    }
-
-    public boolean checkIsUserSubscribed() {
-        return !driver.findElements(By.xpath(FOLLOWING_BUTTON_XPATH)).isEmpty();
-    }
-
-    public void unsubscribed() {
-        getUnFollowBtn().click();
     }
 }

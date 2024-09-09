@@ -51,6 +51,7 @@ dependencies {
 }
 
 def subscribeToNewUsers = tasks.register("subscribeToNewUsers", Test) {
+    systemProperty 'spring.profiles.active', 'prod'
     useJUnitPlatform {
         includeTags "SubscribeToNewUsers"
     }

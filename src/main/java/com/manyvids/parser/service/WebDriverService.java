@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -22,6 +23,13 @@ public class WebDriverService {
     static final int WAIT_TIME_DEFAULT = 10;
 
     public static final String APP_URL = "https://www.manyvids.com/";
+
+    private static String activeProfile = "";
+
+    @Value("${spring.profiles.active}")
+    public void setActiveProfile(final String profiles) {
+        activeProfile = profiles;
+    }
 
     public static WebDriver getDriver() {
         if (driver == null) {
@@ -44,9 +52,10 @@ public class WebDriverService {
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-//        if (appProfile.equals("gitlab")) {
-        options.addArguments("--headless");
-//        }
+        if (activeProfile.equals("prod")) {
+            options.addArguments("--headless");
+            System.out.println("activeProfile = " + activeProfile);
+        }
 
         final LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
