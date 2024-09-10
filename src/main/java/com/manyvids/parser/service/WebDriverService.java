@@ -52,9 +52,9 @@ public class WebDriverService {
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-//        if (activeProfile.equals("prod")) {
+        if (activeProfile.equals("prod")) {
             options.addArguments("--headless");
-//        }
+        }
         System.out.println("activeProfile = " + activeProfile);
 
         final LoggingPreferences logPrefs = new LoggingPreferences();

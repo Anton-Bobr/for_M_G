@@ -1,4 +1,3 @@
 spring:
     datasource:
         url: jdbc:mysql://mysql-manyvids:3306/mydatabase
-#        url: jdbc:mysql://localhost:33069/mydatabase
