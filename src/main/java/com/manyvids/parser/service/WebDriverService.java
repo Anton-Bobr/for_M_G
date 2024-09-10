@@ -47,14 +47,14 @@ public class WebDriverService {
 
     private static void setupWebDriver() {
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-        System.setProperty("java.awt.headless", "false");
+        System.setProperty("java.awt.headless", "true");
 
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-        if (activeProfile.equals("prod")) {
+//        if (activeProfile.equals("prod")) {
             options.addArguments("--headless");
-        }
+//        }
         System.out.println("activeProfile = " + activeProfile);
 
         final LoggingPreferences logPrefs = new LoggingPreferences();
