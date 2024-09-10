@@ -51,6 +51,7 @@ dependencies {
 }
 
 def subscribeToNewUsers = tasks.register("subscribeToNewUsers", Test) {
+    systemProperty 'spring.profiles.active', 'prod'
     useJUnitPlatform {
         includeTags "SubscribeToNewUsers"
     }
@@ -59,10 +60,6 @@ def subscribeToNewUsers = tasks.register("subscribeToNewUsers", Test) {
 allure {
     version = allureVersion
 }
-
-//test {
-//    systemProperty 'spring.profiles.active', 'prod'
-//}
 
 tasks.named('test') {
     useJUnitPlatform()
