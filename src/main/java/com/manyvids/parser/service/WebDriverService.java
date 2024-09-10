@@ -54,8 +54,8 @@ public class WebDriverService {
 
         if (activeProfile.equals("prod")) {
             options.addArguments("--headless");
-            System.out.println("activeProfile = " + activeProfile);
         }
+        System.out.println("activeProfile = " + activeProfile);
 
         final LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);

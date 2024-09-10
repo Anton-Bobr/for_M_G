@@ -17,6 +17,7 @@ public interface SubscriberRepo extends JpaRepository<SubscriberEntity, Long> {
     @Query(value = "SELECT s "
                    + " FROM SubscriberEntity s "
                    + " where s.userSubscribedAt IS NULL "
+                   + " and s.weUnsubscribedAt IS NULL "
                    + " and DATEDIFF(?1, s.weSubscribedAt) >= ?2")
     List<SubscriberEntity> getUsersWhoHaveNotSubscribedXdDays(LocalDateTime now,
                                                               int numberOfDaysForUnsubscribe);
