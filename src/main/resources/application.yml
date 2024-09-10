@@ -2,6 +2,7 @@ spring:
     application:
         name: parser
     datasource:
+#        url: jdbc:mysql://mysql-manyvids:3306/mydatabase
         url: jdbc:mysql://localhost:33069/mydatabase
         username: user
         password: 123456

@@ -46,7 +46,7 @@ def getProject(String repo, String branch) {
 
 def runTestWithTag(String tag) {
     try {
-        labelledShell(label: "Run ${tag}", script: "chmod +x gradlew \n./gradlew -x  -Dspring.profiles.active=prod test ${tag}")
+        labelledShell(label: "Run ${tag}", script: "chmod +x gradlew \n./gradlew -x test ${tag} -Dspring.profiles.active=prod")
     } finally {
         echo "some failed tests"
     }
