@@ -24,11 +24,11 @@ public class WebDriverService {
 
     public static final String APP_URL = "https://www.manyvids.com/";
 
-    private static String activeProfile = "";
+    private static Boolean isUseHandlesMod;
 
-    @Value("${spring.profiles.active}")
-    public void setActiveProfile(final String profiles) {
-        activeProfile = profiles;
+    @Value("${use.handles.mod}")
+    public void setUseHandlesMod(final Boolean isUseHandlesMod) {
+        this.isUseHandlesMod = isUseHandlesMod;
     }
 
     public static WebDriver getDriver() {
@@ -52,10 +52,10 @@ public class WebDriverService {
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-        if (activeProfile.equals("prod")) {
+        if (isUseHandlesMod) {
             options.addArguments("--headless");
         }
-        System.out.println("activeProfile = " + activeProfile);
+        System.out.println("isUseHandlesMod = " + isUseHandlesMod);
 
         final LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);

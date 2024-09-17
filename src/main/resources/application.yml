@@ -27,3 +27,8 @@ app:
             min: 10
             max: 20
         number-of-days-for-unsubscribe: 7
+
+
+use:
+    handles:
+        mod: false
