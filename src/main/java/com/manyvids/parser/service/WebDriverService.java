@@ -52,9 +52,9 @@ public class WebDriverService {
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-        if (isUseHandlesMod) {
-            options.addArguments("--headless");
-        }
+//        if (isUseHandlesMod) {
+//            options.addArguments("--headless");
+//        }
         System.out.println("isUseHandlesMod = " + isUseHandlesMod);
 
         final LoggingPreferences logPrefs = new LoggingPreferences();
