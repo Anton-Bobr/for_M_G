@@ -51,7 +51,7 @@ dependencies {
 }
 
 tasks.register("runTaskOnJenkins", Test) {
-    systemProperty 'spring.profiles.active', 'prod'
+    systemProperty 'spring.profiles.active', 'jenkins'
     useJUnitPlatform {
         includeTags taskTag
     }
