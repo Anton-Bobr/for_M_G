@@ -46,7 +46,7 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu"); // если требуется
 
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
 
         // Запуск браузера Chrome через Selenium
         WebDriver driver = new ChromeDriver(options);
