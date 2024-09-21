@@ -56,20 +56,25 @@ public class WebDriverService {
 //            options.addArguments("--headless");
 //        }
 
-        final LoggingPreferences logPrefs = new LoggingPreferences();
-        logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-        logPrefs.enable(LogType.BROWSER, Level.ALL);
-        options.setCapability("goog:loggingPrefs", logPrefs);
+//        final LoggingPreferences logPrefs = new LoggingPreferences();
+//        logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+//        logPrefs.enable(LogType.BROWSER, Level.ALL);
+//        options.setCapability("goog:loggingPrefs", logPrefs);
+//
+//        options.addArguments("enable-automation");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--disable-infobars");
+//        options.addArguments("--disable-browser-side-navigation");
+//        options.addArguments("--disable-gpu");
+//        options.addArguments("--disable-site-isolation-trials");
+//        options.addArguments("--disable-web-security");
+//        options.addArguments("--hide-scrollbars");
 
-        options.addArguments("enable-automation");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--disable-browser-side-navigation");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu");
-        options.addArguments("--disable-site-isolation-trials");
-        options.addArguments("--disable-web-security");
-        options.addArguments("--hide-scrollbars");
 
         driver = new ChromeDriver(options);
 
