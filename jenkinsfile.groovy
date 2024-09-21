@@ -9,6 +9,11 @@ pipeline {
     tools {
         gradle 'jenkins_gradle_8.8'
     }
+
+    environment {
+        DISPLAY = ':99'
+    }
+
     stages {
         stage('Clone Repo') {
             steps {
@@ -47,10 +52,9 @@ def getProject(String repo, String branch) {
 
 def runTestWithTag(String tag) {
     try {
-        scriptExec("export DISPLAY=:99")
-        echo sh(script: 'env|sort', returnStdout: true)
-        labelledShell(label: "Run ${tag}", script: "chmod +x gradlew \n" +
-                "Xvfb :99 -screen 0 1920x1080x24 & ./gradlew -x test runTaskOnJenkins -PtaskTag=${tag}")
+        sh 'printenv'
+        sh 'Xvfb :99 -screen 0 1920x1080x24'
+        labelledShell(label: "Run ${tag}", script: "chmod +x gradlew \n./gradlew -x test runTaskOnJenkins -PtaskTag=${tag}")
     } finally {
         echo "some failed tests"
     }
