@@ -40,7 +40,7 @@ public abstract class AbstractTestCases {
 
     @BeforeEach
     public void init() {
-//        reInitVariables();
+        reInitVariables();
     }
 
     protected void reInitVariables() {
