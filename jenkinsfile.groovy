@@ -48,7 +48,7 @@ def getProject(String repo, String branch) {
 def runTestWithTag(String tag) {
     try {
         scriptExec("export DISPLAY=:99")
-        echo $DISPLAY
+        echo sh(script: 'env|sort', returnStdout: true)
         labelledShell(label: "Run ${tag}", script: "chmod +x gradlew \n" +
                 "Xvfb :99 -screen 0 1920x1080x24 & ./gradlew -x test runTaskOnJenkins -PtaskTag=${tag}")
     } finally {
