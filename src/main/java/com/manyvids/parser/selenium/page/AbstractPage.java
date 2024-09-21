@@ -84,6 +84,9 @@ public abstract class AbstractPage {
     }
 
     protected void setFilter(final String val) {
+        waitUntil(
+            () -> !driver.findElements(By.xpath(String.format("//form[@class='user-type-filter']//input[@value='%s']",
+                                                              val))).isEmpty());
         new WebElementWithDelay(
             driver.findElement(By.xpath(String.format("//form[@class='user-type-filter']//input[@value='%s']",
                                                       val))))

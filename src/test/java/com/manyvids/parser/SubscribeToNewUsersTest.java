@@ -18,6 +18,7 @@ import java.util.List;
 @Tag("SubscribeToNewUsers")
 class SubscribeToNewUsersTest extends AbstractTestCases {
 
+    @Override
     @BeforeEach
     public void init() {
         loginPage = new LoginPage(getDriver());
