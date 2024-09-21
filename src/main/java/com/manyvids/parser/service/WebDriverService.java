@@ -55,7 +55,6 @@ public class WebDriverService {
 //        if (isUseHandlesMod) {
 //            options.addArguments("--headless");
 //        }
-        System.out.println("isUseHandlesMod = " + isUseHandlesMod);
 
         final LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
