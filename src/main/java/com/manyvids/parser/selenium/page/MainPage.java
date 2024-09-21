@@ -15,7 +15,7 @@ public class MainPage extends AbstractPage {
 
     private final static String PAGE_URN = "";
     private final static String CREATORS_ICON_XPATH =
-        "//div[contains(@class, 'smallSideBar_small_sidebar')]//a[@data-event-label='Creators']";
+        "//div[contains(@class, 'smallSideBar_small_sidebar')]//a[@data-event-label='Creators sss']";
 
     public MainPage(final WebDriver driver) {
         super(driver);
