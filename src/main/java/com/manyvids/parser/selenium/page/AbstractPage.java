@@ -47,7 +47,7 @@ public abstract class AbstractPage {
     public void waitForPageLoad() {
         System.out.println("Waiting for page to finish loading");
         waitUntil(() -> (((JavascriptExecutor) driver).executeScript("return document.readyState")).equals("complete"),
-                  20);
+                  60);
     }
 
     public void waitElementLoad(final WebElement e) {
