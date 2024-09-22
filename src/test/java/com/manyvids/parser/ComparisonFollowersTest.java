@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Tag("ComparisonFollowers")
@@ -19,13 +20,22 @@ public class ComparisonFollowersTest extends AbstractTestCases {
 
     @Test
     void contextLoads() {
-        loginPage.loginOnSite(user, pass);
 
-        userPage.goToFollowers();
+        final List<String> followers = new ArrayList<>();
+        final List<String> following = new ArrayList<>();
+        int subscribedUsers = 0;
+        try {
+            loginPage.loginOnSite(user, pass);
 
-        final List<String> followers = userPage.getAllFollowers();
-        final List<String> following = userPage.getAllFollowing();
+            userPage.goToFollowers();
 
-        subscriberService.compareFollowersAnsSaveNew(followers, following);
+            followers.addAll(userPage.getAllFollowers());
+            following.addAll(userPage.getAllFollowing());
+            subscribedUsers = subscriberService.compareFollowersAnsSaveNew(followers, following);
+        } finally {
+            parsingLogService.saveComparisonFollowersLog(followers.size(),
+                                                         following.size(),
+                                                         subscribedUsers);
+        }
     }
 }

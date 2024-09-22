@@ -15,7 +15,7 @@ public class SubscriberService {
     @Autowired
     private SubscriberRepo subscriberRepo;
 
-    public void compareFollowersAnsSaveNew(final List<String> followers,
+    public int compareFollowersAnsSaveNew(final List<String> followers,
                                            final List<String> following) {
         final List<String> commonNamesList = following.stream().filter(followers::contains).toList();
         final List<SubscriberEntity> subscriberEntityForUpdate = new ArrayList<>();
@@ -32,6 +32,7 @@ public class SubscriberService {
                 .forEach(subscriberEntity -> subscriberEntity.setUserSubscribedAt(LocalDateTime.now()));
             subscriberRepo.saveAllAndFlush(subscriberEntityForUpdate);
         }
+        return subscriberEntityForUpdate.size();
     }
 
     public boolean isFollowerExist(final String userName) {

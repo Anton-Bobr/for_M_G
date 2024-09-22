@@ -15,23 +15,45 @@ import java.util.Map;
 public class ParsingLogService {
     @Autowired
     private ParsingLogRepo parsingLogRepo;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @SneakyThrows
     public void saveUnsubscribingLog(final int numberOfDaysForUnsubscribe,
                                      final int numberOfUserForUnsubscribing,
                                      final int numberOfUserRealUnsubscribed) {
 
-        final ParsingLogEntity entity = new ParsingLogEntity();
-        entity.setLogType("Unsubscribing");
+        final ParsingLogEntity entity = createLogEntity("Unsubscribing");
 
         final Map<String, Object> data = new HashMap();
         data.put("numberOfDaysForUnsubscribe", numberOfDaysForUnsubscribe);
         data.put("numberOfUserForUnsubscribing", numberOfUserForUnsubscribing);
         data.put("numberOfUserRealUnsubscribed", numberOfUserRealUnsubscribed);
-        final ObjectMapper objectMapper = new ObjectMapper();
-        final String jacksonData = objectMapper.writeValueAsString(data);
-        entity.setData(jacksonData);
-        entity.setCreateAt(LocalDateTime.now());
+
+        entity.setData(objectMapper.writeValueAsString(data));
         parsingLogRepo.saveAndFlush(entity);
+    }
+
+    @SneakyThrows
+    public void saveComparisonFollowersLog(final int numberOfFollowers,
+                                           final int numberOfFollowing,
+                                           final int subscribedUsers) {
+
+        final ParsingLogEntity entity = createLogEntity("ComparisonFollowers");
+
+        final Map<String, Object> data = new HashMap();
+        data.put("numberOfFollowers", numberOfFollowers);
+        data.put("numberOfFollowing", numberOfFollowing);
+        data.put("subscribedUsers", subscribedUsers);
+
+        entity.setData(objectMapper.writeValueAsString(data));
+        parsingLogRepo.saveAndFlush(entity);
+    }
+
+    private ParsingLogEntity createLogEntity(final String type) {
+        final ParsingLogEntity entity = new ParsingLogEntity();
+        entity.setLogType(type);
+        entity.setCreateAt(LocalDateTime.now());
+        return entity;
     }
 }

@@ -36,7 +36,7 @@ public class UserPage extends AbstractPage {
 
     public List<String> getAllMembersFromTab(final WebElementWithDelay tab) {
         tab.click();
-        setFilter("MEMBER");
+//        setFilter("MEMBER");
         return getFollowersList().stream().map(this::mapFollowerCardToNames).toList();
     }
 
