@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Tag("Unsubscribing")
 public class UnsubscribingTest extends AbstractTestCases {
@@ -17,9 +18,8 @@ public class UnsubscribingTest extends AbstractTestCases {
     @Value("${app.settings.number-of-days-for-unsubscribe}")
     protected int numberOfDaysForUnsubscribe;
 
-    @Override
     @BeforeEach
-    public void init() {
+    public void initPages() {
         loginPage = new LoginPage(getDriver());
         userPage = new UserPage(getDriver());
         followerPage = new FollowerPage(getDriver());
@@ -29,22 +29,35 @@ public class UnsubscribingTest extends AbstractTestCases {
     void unsubscribing() {
         final List<SubscriberEntity> usersForUnsubscribing =
             subscriberService.getUsersWhoHaveNotSubscribedXdDays(numberOfDaysForUnsubscribe);
-
-        if (!usersForUnsubscribing.isEmpty()) {
-            loginPage.loginOnSite(user, pass);
-            usersForUnsubscribing.forEach(user -> unsubscribe(user));
+        final AtomicInteger numberOfUserRealUnsubscribed = new AtomicInteger(0);
+        try {
+            if (!usersForUnsubscribing.isEmpty()) {
+                loginPage.loginOnSite(user, pass);
+                usersForUnsubscribing.forEach(user -> {
+                    final boolean isUnsubscribed = unsubscribe(user);
+                    if (isUnsubscribed) {
+                        numberOfUserRealUnsubscribed.getAndIncrement();
+                    }
+                });
+            }
+        } finally {
+            parsingLogService.saveUnsubscribingLog(numberOfDaysForUnsubscribe,
+                                                   usersForUnsubscribing.size(),
+                                                   numberOfUserRealUnsubscribed.get());
         }
     }
 
-    private void unsubscribe(final SubscriberEntity user) {
+    private boolean unsubscribe(final SubscriberEntity user) {
         followerPage.open(String.format(followerPage.PAGE_URN, user.getUserName(), user.getUserId()));
         final boolean isUserSubscribed = followerPage.checkIsUserSubscribed();
         if (isUserSubscribed) {
             followerPage.unsubscribed();
             subscriberService.updateUserAsUnsubscribed(user);
             System.out.println("We unsubscribe from the username <" + user.getUserName() + ">");
+            return true;
         } else {
             System.err.println("We weren't subscribed to the username <" + user.getUserName() + ">");
+            return false;
         }
     }
 

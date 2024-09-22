@@ -5,15 +5,12 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 @Service
 public class WebDriverService {
@@ -51,25 +48,6 @@ public class WebDriverService {
 
         final ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-
-//        if (isUseHandlesMod) {
-//            options.addArguments("--headless");
-//        }
-
-//        final LoggingPreferences logPrefs = new LoggingPreferences();
-//        logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-//        logPrefs.enable(LogType.BROWSER, Level.ALL);
-//        options.setCapability("goog:loggingPrefs", logPrefs);
-//
-//        options.addArguments("enable-automation");
-//        options.addArguments("--no-sandbox");
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--disable-infobars");
-//        options.addArguments("--disable-browser-side-navigation");
-//        options.addArguments("--disable-gpu");
-//        options.addArguments("--disable-site-isolation-trials");
-//        options.addArguments("--disable-web-security");
-//        options.addArguments("--hide-scrollbars");
 
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");

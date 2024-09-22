@@ -5,6 +5,7 @@ import com.manyvids.parser.selenium.page.FollowerPage;
 import com.manyvids.parser.selenium.page.LoginPage;
 import com.manyvids.parser.selenium.page.MainPage;
 import com.manyvids.parser.selenium.page.UserPage;
+import com.manyvids.parser.service.ParsingLogService;
 import com.manyvids.parser.service.SubscriberService;
 import com.manyvids.parser.service.WebDriverService;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +28,8 @@ public abstract class AbstractTestCases {
     private WebDriverService driverService;
     @Autowired
     protected SubscriberService subscriberService;
+    @Autowired
+    protected ParsingLogService parsingLogService;
 
     protected LoginPage loginPage;
     protected MainPage mainPage;

@@ -21,7 +21,7 @@ public class ParsingLogEntity extends HasIdAndVersionAbstractEntity {
     @Column(name = "TYPE", nullable = false, length = 256)
     private String logType;
 
-    @Column(name = "DATA", nullable = false, length = 256)
+    @Column(name = "DATA", nullable = false, length = 1024)
     private String data;
 
     @Column(name = "CREATE_AT", nullable = false)

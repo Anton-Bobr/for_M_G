@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import static com.manyvids.parser.util.WaitConditionUtil.waitUntil;
+
 
 public class LoginPage extends AbstractPage {
 
@@ -20,6 +22,10 @@ public class LoginPage extends AbstractPage {
         getLoginInput().sendKeys(login);
         getPassInput().sendKeys(pass);
         getSingInBtn().click();
+        waitUntil(() -> !driver.findElements(
+                By.xpath(String.format("//p[contains(@class, 'ProfileAboutMeUI') and text() = '%s']",
+                                       login)))
+            .isEmpty());
         waitForPageLoad();
     }
 
