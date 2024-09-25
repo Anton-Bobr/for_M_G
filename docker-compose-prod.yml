@@ -2,6 +2,8 @@ version: '3.5'
 
 services:
     mysql:
+        volumes:
+            - ./mysql_data:/var/lib/mysql
         networks:
             - jenkins
 

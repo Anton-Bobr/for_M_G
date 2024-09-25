@@ -3,12 +3,32 @@ USER root
 RUN apt-get update && apt-get install -y lsb-release
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
   https://download.docker.com/linux/debian/gpg
+
+RUN apt-get install -y wget \
+  unzip \
+  xvfb \
+  x11-xserver-utils \
+  dbus-x11 \
+  libasound2 \
+  libx11-xcb1 \
+  libxcomposite1 \
+  libxdamage1 \
+  libxi6 \
+  libxtst6 \
+  libnss3 \
+  libxrandr2 \
+  libxcursor1 \
+  libxinerama1 \
+  libfontconfig1 \
+  libgl1-mesa-glx \
+  ca-certificates \
+  fonts-liberation \
+  fonts-dejavu-core
+
  # Chrome instalation
 RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 RUN rm google-chrome-stable_current_amd64.deb
-# Check chrome version
-RUN echo "Chrome: " && google-chrome --version
 
 ### install chromedriver
 ENV CHROMEDRIVER_VERSION=128.0.6613.119
