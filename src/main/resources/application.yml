@@ -19,6 +19,8 @@ app:
         username: dvLCtdDO_cRjgSCcD
         password: sdfsdgf@$@123
 
+        max-number-of-tries : 3
+
         delay:
             min: 1
             max: 2

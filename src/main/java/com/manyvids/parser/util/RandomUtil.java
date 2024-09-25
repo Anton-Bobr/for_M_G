@@ -31,7 +31,7 @@ public class RandomUtil {
         Thread.sleep(getRandom(DELAY_MIN, DELAY_MAN) * 1000);
     }
 
-    private static int getRandom(final int from,
+    public static int getRandom(final int from,
                                  final int to) {
         return RANDOM.nextInt(from, to);
     }

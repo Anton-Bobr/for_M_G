@@ -53,6 +53,9 @@ public class WebDriverService {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu");
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+        options.addArguments("--disable-web-security");
+        options.addArguments("--disable-infobars");
 
         driver = new ChromeDriver(options);
 

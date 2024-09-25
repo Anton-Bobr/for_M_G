@@ -3,8 +3,12 @@ package com.manyvids.parser.selenium.page;
 import com.manyvids.parser.selenium.WebElementWithDelay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -19,6 +23,7 @@ public class UserPage extends AbstractPage {
 
     public void goToFollowers() {
         getFollowingBtn().click();
+        waitForPageLoad();
     }
 
 
@@ -35,8 +40,11 @@ public class UserPage extends AbstractPage {
     }
 
     public List<String> getAllMembersFromTab(final WebElementWithDelay tab) {
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(tab.getElement()));
         tab.click();
 //        setFilter("MEMBER");
+        waitForPageLoad();
         return getFollowersList().stream().map(this::mapFollowerCardToNames).toList();
     }
 
