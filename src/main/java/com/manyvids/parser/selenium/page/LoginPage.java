@@ -73,8 +73,6 @@ public class LoginPage extends AbstractPage {
                 getRandomDelay();
                 fakeMouseMove(login);
             } else {
-                robot.mousePress(InputEvent.BUTTON3_MASK);
-                robot.mouseRelease(InputEvent.BUTTON3_MASK);
                 throw e;
             }
         }
