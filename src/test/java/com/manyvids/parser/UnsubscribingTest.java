@@ -44,6 +44,9 @@ public class UnsubscribingTest extends AbstractTestCases {
             parsingLogService.saveUnsubscribingLog(numberOfDaysForUnsubscribe,
                                                    usersForUnsubscribing.size(),
                                                    numberOfUserRealUnsubscribed.get());
+            if(usersForUnsubscribing.size() != numberOfUserRealUnsubscribed.get()){
+                throw new RuntimeException("SOMETHING WRONG");
+            }
         }
     }
 

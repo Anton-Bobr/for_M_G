@@ -69,7 +69,7 @@ public class LoginPage extends AbstractPage {
                 repeats > 0) {
                 repeats--;
                 getRandomDelay();
-                driver.findElement(By.xpath("//div[@data-testid = 'close-icon']//svg")).click();
+                driver.findElement(By.xpath("//div[@data-testid = 'close-icon']")).click();
                 getRandomDelay();
                 fakeMouseMove(login);
             } else {
