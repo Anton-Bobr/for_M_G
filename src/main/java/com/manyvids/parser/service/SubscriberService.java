@@ -41,6 +41,7 @@ public class SubscriberService {
 
     public void createAndSaveNewSubscriber(final String followerName,
                                            final String userId) {
+
         final SubscriberEntity se = new SubscriberEntity();
         se.setUserName(followerName);
         se.setUserId(userId);

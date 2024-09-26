@@ -59,7 +59,7 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
                                                                actualNumberOfTries);
             }
         } else {
-            throw new RuntimeException("Limit for Subscribe today reached.");
+            System.out.println("Limit for Subscribe today reached.");
         }
     }
 

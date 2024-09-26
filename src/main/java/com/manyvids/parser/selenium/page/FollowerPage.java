@@ -22,7 +22,11 @@ public class FollowerPage extends AbstractPage {
             System.out.println("followerName: " + followerName + " page FAILED");
             return null;
         }
-        clickAdnCloseBannerIfNeed(getFollowBtn());
+        if (driver.findElements(By.xpath(FOLLOWING_BUTTON_XPATH)).isEmpty()){
+            clickAdnCloseBannerIfNeed(getFollowBtn());
+        } else {
+            System.out.println("User was followed before");
+        }
         final String[] arg = driver.getCurrentUrl().split("/");
         return arg[arg.length - 2];
     }

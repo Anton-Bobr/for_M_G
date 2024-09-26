@@ -73,7 +73,7 @@ public class LoginPage extends AbstractPage {
                 getRandomDelay();
                 fakeMouseMove(login);
             } else {
-                throw e;
+                throw new RuntimeException("Login blocked");
             }
         }
 

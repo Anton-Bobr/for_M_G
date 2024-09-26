@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
     myjenkins-blueocean-full:
-        image: myjenkins-blueocean:lts-jdk21-chrome-driver-full
+        image: myjenkins-blueocean:lts-jdk21-chrome-driver
         container_name: jenkins-blueocean-full
         restart: on-failure
         privileged: true
