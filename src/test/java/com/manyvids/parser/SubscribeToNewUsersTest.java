@@ -115,4 +115,17 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
         getDriver().switchTo().window(tabs.getLast());
         creatorPage.waitForPageLoad();
     }
+
+    @Override
+    protected void reInitVariables() {
+        final String minNumberUnsubscribingEnv = System.getenv("MIN_NUMBER_FOR_DAILY_SUBSCRIBING");
+        final String maxNumberUnsubscribingEnv = System.getenv("MAX_NUMBER_FOR_DAILY_SUBSCRIBING");
+        if (minNumberUnsubscribingEnv != null &&
+            maxNumberUnsubscribingEnv != null &&
+            Integer.parseInt(maxNumberUnsubscribingEnv) >= Integer.parseInt(minNumberUnsubscribingEnv)) {
+            SUBSCRIPTIONS_PER_DAY_MIN = Integer.parseInt(minNumberUnsubscribingEnv);
+            SUBSCRIPTIONS_PER_DAY_MAX = Integer.parseInt(maxNumberUnsubscribingEnv);
+        }
+        super.reInitVariables();
+    }
 }
