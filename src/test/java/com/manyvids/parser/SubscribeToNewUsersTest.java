@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.naming.LimitExceededException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +50,12 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
                 mainPage.goToCreators();
                 mainPage.selectContentType(ContentTypeEnum.WOMEN_CREATORS);
                 final List<WebElementWithDelay> creatorElementsList = mainPage.getCreatorElementsList();
-                creatorElementsList.forEach(this::subscribeToAllCreatorsFollowers);
+                for (final WebElementWithDelay webElementWithDelay : creatorElementsList) {
+                    subscribeToAllCreatorsFollowers(webElementWithDelay);
+                }
+            } catch (final LimitExceededException ignored) {
+                System.out.println(ignored.getMessage());
+                logResult();
             } finally {
                 parsingLogService.updateSubscribeToNewUsersLog(logEntity,
                                                                maxNumberOfSubscriptionsToday,
@@ -57,8 +63,15 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
                                                                actualNumberOfTries);
             }
         } else {
-            System.out.println("Limit for Subscribe today reached.");
+            System.out.println("Limit for Subscribe or tries today reached.");
+            logResult();
         }
+    }
+
+    private void logResult() {
+        System.out.println("maxNumberOfSubscriptionsToday = " + maxNumberOfSubscriptionsToday);
+        System.out.println("actualNumberOfSubscriptionsToday = " + actualNumberOfSubscriptionsToday);
+        System.out.println("actualNumberOfTries = " + actualNumberOfTries);
     }
 
     private boolean isCanSubscribeMoreUsersToday(final ParsingLogEntity logEntity) {
@@ -76,17 +89,20 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
                (Integer) map.get("maxNumberOfSubscriptionsToday") > actualNumberOfSubscriptionsToday;
     }
 
-    private void subscribeToAllCreatorsFollowers(final WebElementWithDelay creatorElement) {
+    private void subscribeToAllCreatorsFollowers(final WebElementWithDelay creatorElement)
+        throws LimitExceededException {
         creatorElement.sendKeys(new CharSequence[]{Keys.CONTROL, Keys.RETURN});
         goToLastBrowserTab();
         creatorPage.goToFollowers();
         final List<WebElementWithDelay> followersList = creatorPage.getFollowersList();
-        followersList.forEach(this::subscribeIfNeed);
+        for (final WebElementWithDelay webElementWithDelay : followersList) {
+            subscribeIfNeed(webElementWithDelay);
+        }
         getDriver().close();
         goToLastBrowserTab();
     }
 
-    private void subscribeIfNeed(final WebElementWithDelay followerElement) {
+    private void subscribeIfNeed(final WebElementWithDelay followerElement) throws LimitExceededException {
         if (actualNumberOfSubscriptionsToday < maxNumberOfSubscriptionsToday) {
             final String followerName = creatorPage.mapFollowerCardToNames(followerElement);
             System.out.println("process followerName: " + followerName);
@@ -104,7 +120,7 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
                 goToLastBrowserTab();
             }
         } else {
-            throw new RuntimeException("Limit for Subscribe today reached.");
+            throw new LimitExceededException("Limit for Subscribe today reached.");
         }
     }
 
