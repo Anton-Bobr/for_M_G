@@ -42,7 +42,7 @@ public abstract class AbstractTestCases {
     }
 
     @BeforeEach
-    public void init() {
+    public void initVar() {
         reInitVariables();
     }
 

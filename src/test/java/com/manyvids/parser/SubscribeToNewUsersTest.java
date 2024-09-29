@@ -32,8 +32,6 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
     protected Integer maxNumberOfSubscriptionsToday = 0;
     protected int actualNumberOfSubscriptionsToday = 0;
 
-
-    @Override
     @BeforeEach
     public void init() {
         loginPage = new LoginPage(getDriver());
