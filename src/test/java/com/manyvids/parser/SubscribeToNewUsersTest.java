@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.naming.LimitExceededException;
 import java.util.ArrayList;
@@ -26,8 +25,8 @@ import static com.manyvids.parser.util.RandomUtil.getRandom;
 @Tag("SubscribeToNewUsers")
 class SubscribeToNewUsersTest extends AbstractTestCases {
 
-    @Value("${app.settings.max-number-of-tries}")
-    protected Integer maxNumberOfTries;
+//    @Value("${app.settings.max-number-of-tries}")
+//    protected Integer maxNumberOfTries;
 
     protected Integer actualNumberOfTries;
     protected Integer maxNumberOfSubscriptionsToday = 0;
@@ -78,15 +77,15 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
         if (logEntity.getId() == null) {
             maxNumberOfSubscriptionsToday = getRandom(SUBSCRIPTIONS_PER_DAY_MIN,
                                                       SUBSCRIPTIONS_PER_DAY_MAX);
-            actualNumberOfTries = 0;
+//            actualNumberOfTries = 0;
             return true;
         }
         final HashMap<String, Object> map = parsingLogService.convertJsonToMap(logEntity.getData());
         actualNumberOfSubscriptionsToday = (Integer) map.get("actualNumberOfSubscriptionsToday");
         actualNumberOfTries = (Integer) map.get("actualNumberOfTries");
         maxNumberOfSubscriptionsToday = (Integer) map.get("maxNumberOfSubscriptionsToday");
-        return (Integer) map.get("actualNumberOfTries") < maxNumberOfTries &&
-               (Integer) map.get("maxNumberOfSubscriptionsToday") > actualNumberOfSubscriptionsToday;
+//        return (Integer) map.get("actualNumberOfTries") < maxNumberOfTries &&
+        return (Integer) map.get("maxNumberOfSubscriptionsToday") > actualNumberOfSubscriptionsToday;
     }
 
     private void subscribeToAllCreatorsFollowers(final WebElementWithDelay creatorElement)
