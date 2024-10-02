@@ -77,7 +77,7 @@ class SubscribeToNewUsersTest extends AbstractTestCases {
         if (logEntity.getId() == null) {
             maxNumberOfSubscriptionsToday = getRandom(SUBSCRIPTIONS_PER_DAY_MIN,
                                                       SUBSCRIPTIONS_PER_DAY_MAX);
-//            actualNumberOfTries = 0;
+            actualNumberOfTries = 0;
             return true;
         }
         final HashMap<String, Object> map = parsingLogService.convertJsonToMap(logEntity.getData());
